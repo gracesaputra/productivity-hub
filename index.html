@@ -6,6 +6,12 @@
   <meta name="theme-color" content="#0f766e">
   <title>Productivity Hub - Aplikasi Produktivitas Mobile</title>
   
+  <!-- Konfigurasi PWA -->
+  <link rel="manifest" href="data:application/manifest+json;utf-8,%7B%22name%22%3A%22Productivity%20Hub%22%2C%22short_name%22%3A%22ProdHub%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23f8fafc%22%2C%22theme_color%22%3A%22%230f766e%22%7D">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="ProductivityHub">
+  
   <!-- Google Fonts: Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -141,6 +147,50 @@
       opacity: 0.9;
       font-weight: 500;
       margin-top: 2px;
+    }
+
+    .header-badges {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 5px;
+    }
+
+    .cloud-sync-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      color: #ffffff;
+      padding: 3px 9px;
+      border-radius: var(--radius-pill);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      transition: all 0.2s ease;
+    }
+
+    .cloud-dot {
+      width: 6.5px;
+      height: 6.5px;
+      border-radius: 50%;
+      background: #10b981;
+      display: inline-block;
+      box-shadow: 0 0 6px #10b981;
+      transition: all 0.25s ease;
+    }
+
+    .cloud-dot.syncing {
+      background: #f59e0b;
+      box-shadow: 0 0 6px #f59e0b;
+    }
+
+    .cloud-dot.offline {
+      background: #9ca3af;
+      box-shadow: none;
     }
 
     .current-date-badge {
@@ -357,6 +407,47 @@
       color: #15803d;
     }
 
+    /* Deadline Task Styling */
+    .deadline-section {
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px dashed var(--border-color);
+    }
+
+    .deadline-label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .btn-clear-deadline {
+      background: none;
+      border: none;
+      color: var(--danger);
+      font-size: 0.72rem;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 0;
+      text-decoration: underline;
+    }
+
+    .deadline-input-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      margin-bottom: 0;
+    }
+
+    .app-input-deadline {
+      width: 100%;
+      cursor: pointer;
+      font-size: 0.85rem;
+      color: var(--text-main);
+      padding: 9px 12px;
+      background: #ffffff;
+    }
+
     .filter-section {
       display: flex;
       background: #ffffff;
@@ -487,6 +578,8 @@
       display: flex;
       align-items: center;
       gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 4px;
     }
 
     .meta-priority-pill {
@@ -502,6 +595,41 @@
     .meta-priority-pill.high { background: #fee2e2; color: #b91c1c; }
     .meta-priority-pill.med { background: #fef3c7; color: #b45309; }
     .meta-priority-pill.low { background: #e0f2fe; color: #0369a1; }
+
+    .meta-deadline-pill {
+      font-size: 0.66rem;
+      padding: 1.5px 8px;
+      border-radius: var(--radius-pill);
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 3.5px;
+      line-height: 1.3;
+    }
+
+    .meta-deadline-pill.overdue {
+      background: #fef2f2;
+      color: #dc2626;
+      border: 1px solid #fecaca;
+    }
+
+    .meta-deadline-pill.today {
+      background: #fffbeb;
+      color: #b45309;
+      border: 1px solid #fde68a;
+    }
+
+    .meta-deadline-pill.upcoming {
+      background: #f0fdfa;
+      color: #0f766e;
+      border: 1px solid #ccfbf1;
+    }
+
+    .meta-deadline-pill.completed {
+      background: #f3f4f6;
+      color: #9ca3af;
+      border: 1px solid #e5e7eb;
+    }
 
     .meta-time {
       font-size: 0.68rem;
@@ -551,10 +679,47 @@
     .focus-timer-card {
       background: #ffffff;
       border-radius: var(--radius-lg);
-      padding: 22px 18px 24px 18px;
+      padding: 20px 18px 24px 18px;
       text-align: center;
       box-shadow: var(--shadow-card);
       border: 1px solid var(--border-color);
+    }
+
+    .timer-top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      padding: 0 2px;
+    }
+
+    .timer-title-text {
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .btn-customize-timer {
+      background: #f8f7f4;
+      border: 1.5px solid var(--border-color);
+      color: var(--primary);
+      padding: 4px 11px;
+      border-radius: var(--radius-pill);
+      font-size: 0.74rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-customize-timer:hover, .btn-customize-timer:active {
+      background: #f0fdfa;
+      border-color: var(--accent-teal);
+      transform: scale(0.97);
     }
 
     .timer-modes {
@@ -1212,6 +1377,115 @@
       background: #f8f7f4;
     }
 
+    /* Modal Kustomisasi Timer */
+    .timer-settings-modal-box {
+      max-width: 375px;
+      text-align: left;
+    }
+
+    .timer-settings-form {
+      margin-top: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .settings-group {
+      background: #fbfbfa;
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+    }
+
+    .settings-group-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .settings-group-header label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .settings-val-badge {
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--primary);
+      background: #f0fdfa;
+      padding: 2px 8px;
+      border-radius: var(--radius-pill);
+      border: 1px solid #ccfbf1;
+    }
+
+    .settings-stepper-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .btn-step {
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-sm);
+      border: 1.5px solid var(--border-color);
+      background: #ffffff;
+      color: var(--text-main);
+      font-size: 1.15rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      flex-shrink: 0;
+    }
+
+    .btn-step:hover, .btn-step:active {
+      background: #f0fdfa;
+      border-color: var(--accent-teal);
+      color: var(--primary);
+    }
+
+    .stepper-input {
+      text-align: center;
+      font-size: 1.05rem;
+      font-weight: 800;
+      padding: 6px 10px;
+    }
+
+    .settings-quick-chips {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .chip-preset {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-pill);
+      padding: 3px 9px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .chip-preset:hover {
+      border-color: var(--accent-teal);
+      color: var(--primary);
+    }
+
+    .chip-preset.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
+    }
+
     /* Canvas Confetti */
     #confettiCanvas {
       position: fixed;
@@ -1248,8 +1522,14 @@
             <p id="headerSubtitle">Kelola & selesaikan target harianmu</p>
           </div>
         </div>
-        <div class="current-date-badge" id="currentDateBadge">
-          Hari Ini
+        <div class="header-badges">
+          <div class="cloud-sync-badge" id="cloudSyncBadge" title="Status Cloud Firebase">
+            <span class="cloud-dot" id="cloudDot"></span>
+            <span id="cloudSyncText">Firebase</span>
+          </div>
+          <div class="current-date-badge" id="currentDateBadge">
+            Hari Ini
+          </div>
         </div>
       </div>
     </header>
@@ -1307,6 +1587,17 @@
                 Rendah
               </button>
             </div>
+
+            <!-- Input Deadline / Tenggat Waktu (Opsional) -->
+            <div class="deadline-section">
+              <div class="deadline-label-row">
+                <span class="priority-pill-label" style="margin-bottom: 0;">Tenggat Waktu / Deadline (Opsional)</span>
+                <button type="button" class="btn-clear-deadline" id="btnClearDeadline" style="display: none;">Hapus</button>
+              </div>
+              <div class="deadline-input-wrap">
+                <input type="datetime-local" id="taskDeadlineInput" class="app-input app-input-deadline" aria-label="Pilih tenggat waktu">
+              </div>
+            </div>
           </form>
         </div>
 
@@ -1336,14 +1627,26 @@
       <!-- ================= TAB 2: FOKUS (POMODORO) ================= -->
       <section id="tab-focus" class="tab-pane">
         <div class="focus-timer-card">
-          <!-- Pilihan Mode Sesi: Fokus Belajar 25 Menit & Istirahat Santai 5 Menit -->
+          <!-- Bar Kustomisasi & Pilihan Mode Sesi -->
+          <div class="timer-top-bar">
+            <span class="timer-title-text">Mode Sesi Timer</span>
+            <button type="button" class="btn-customize-timer" id="btnOpenTimerSettings" aria-label="Kustomisasi Durasi Pomodoro">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+              </svg>
+              <span>Kustomisasi</span>
+            </button>
+          </div>
+
+          <!-- Pilihan Mode Sesi: Fokus Belajar & Istirahat Santai -->
           <div class="timer-modes">
             <button class="mode-btn active" data-mode="pomodoro" id="modeFocusBtn">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="12" cy="12" r="10"></circle>
                 <polyline points="12 6 12 12 16 14"></polyline>
               </svg>
-              Fokus Belajar 25 Menit
+              <span id="labelModeFocus">Fokus Belajar 25m</span>
             </button>
             <button class="mode-btn" data-mode="shortBreak" id="modeBreakBtn">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
@@ -1353,7 +1656,7 @@
                 <line x1="10" y1="1" x2="10" y2="4"></line>
                 <line x1="14" y1="1" x2="14" y2="4"></line>
               </svg>
-              Istirahat Santai 5 Menit
+              <span id="labelModeBreak">Istirahat 5m</span>
             </button>
           </div>
 
@@ -1557,6 +1860,70 @@
       </button>
     </nav>
 
+    <!-- Modal Kustomisasi Pomodoro Timer -->
+    <div class="modal-overlay" id="timerSettingsModal" role="dialog" aria-modal="true" aria-labelledby="timerSettingsTitle">
+      <div class="modal-box timer-settings-modal-box">
+        <div class="modal-emoji" style="font-size: 2.2rem; margin-bottom: 8px;">⚙️</div>
+        <h2 class="modal-title" id="timerSettingsTitle" style="font-size: 1.1rem;">Kustomisasi Durasi Timer</h2>
+        <p class="modal-desc" style="margin-bottom: 14px;">Atur durasi fokus belajar & rehat santai sesuai kenyamananmu.</p>
+
+        <div class="timer-settings-form">
+          <!-- Waktu Fokus -->
+          <div class="settings-group">
+            <div class="settings-group-header">
+              <label for="customFocusInput">Waktu Fokus (Menit)</label>
+              <span class="settings-val-badge" id="customFocusValBadge">25 Menit</span>
+            </div>
+            <div class="settings-stepper-wrap">
+              <button type="button" class="btn-step" id="btnFocusDec" aria-label="Kurangi waktu fokus">-</button>
+              <input type="number" id="customFocusInput" min="1" max="180" value="25" class="app-input stepper-input" aria-label="Waktu fokus dalam menit">
+              <button type="button" class="btn-step" id="btnFocusInc" aria-label="Tambah waktu fokus">+</button>
+            </div>
+            <div class="settings-quick-chips">
+              <button type="button" class="chip-preset" data-target="focus" data-val="15">15m</button>
+              <button type="button" class="chip-preset active" data-target="focus" data-val="25">25m (Default)</button>
+              <button type="button" class="chip-preset" data-target="focus" data-val="45">45m</button>
+              <button type="button" class="chip-preset" data-target="focus" data-val="50">50m</button>
+              <button type="button" class="chip-preset" data-target="focus" data-val="60">60m</button>
+            </div>
+          </div>
+
+          <!-- Waktu Rehat -->
+          <div class="settings-group">
+            <div class="settings-group-header">
+              <label for="customBreakInput">Waktu Rehat / Santai (Menit)</label>
+              <span class="settings-val-badge" id="customBreakValBadge">5 Menit</span>
+            </div>
+            <div class="settings-stepper-wrap">
+              <button type="button" class="btn-step" id="btnBreakDec" aria-label="Kurangi waktu istirahat">-</button>
+              <input type="number" id="customBreakInput" min="1" max="60" value="5" class="app-input stepper-input" aria-label="Waktu istirahat dalam menit">
+              <button type="button" class="btn-step" id="btnBreakInc" aria-label="Tambah waktu istirahat">+</button>
+            </div>
+            <div class="settings-quick-chips">
+              <button type="button" class="chip-preset" data-target="break" data-val="3">3m</button>
+              <button type="button" class="chip-preset active" data-target="break" data-val="5">5m (Default)</button>
+              <button type="button" class="chip-preset" data-target="break" data-val="10">10m</button>
+              <button type="button" class="chip-preset" data-target="break" data-val="15">15m</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-actions" style="margin-top: 18px;">
+          <button type="button" class="btn-modal-primary" id="btnSaveTimerSettings">
+            Terapkan & Simpan
+          </button>
+          <div style="display: flex; gap: 8px; width: 100%;">
+            <button type="button" class="btn-modal-secondary" id="btnResetTimerDefaults" style="flex: 1;">
+              Default (25/5m)
+            </button>
+            <button type="button" class="btn-modal-secondary" id="btnCloseTimerSettingsModal" style="flex: 1;">
+              Tutup
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Modal Ajakan Refleksi (Popup Ramah) -->
     <div class="modal-overlay" id="reflectionModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <div class="modal-box">
@@ -1587,10 +1954,167 @@
     </div>
   </div>
 
-  <!-- Application Logic (Vanilla JS) -->
-  <script>
-    (function () {
-      'use strict';
+  <!-- Application Logic & Firebase Integration (ES Module) -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { 
+      getFirestore, 
+      doc, 
+      setDoc, 
+      onSnapshot 
+    } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+    import { 
+      getAuth, 
+      signInAnonymously 
+    } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+    // ==========================================
+    // KONFIGURASI FIREBASE
+    // ==========================================
+    const firebaseConfig = {
+      apiKey: "AIzaSyDlRF8AgzqznpnkhpoSDbrYV3m9b3pV12E",
+      authDomain: "productivity-grace.firebaseapp.com",
+      projectId: "productivity-grace",
+      storageBucket: "productivity-grace.firebasestorage.app",
+      messagingSenderId: "435490351366",
+      appId: "1:435490351366:web:5c61e05d15828547fe5687"
+    };
+
+    let app = null;
+    let db = null;
+    let auth = null;
+    let isRemoteUpdating = false;
+    let syncDebounceTimer = null;
+
+    // ID Pengguna / Perangkat Unik Persisten
+    let currentUserId = localStorage.getItem('prodhub_user_id');
+    if (!currentUserId) {
+      currentUserId = 'user_' + Math.random().toString(36).substring(2, 9) + Date.now().toString(36);
+      localStorage.setItem('prodhub_user_id', currentUserId);
+    }
+
+    const cloudSyncBadge = document.getElementById('cloudSyncBadge');
+    const cloudSyncText = document.getElementById('cloudSyncText');
+    const cloudDot = document.getElementById('cloudDot');
+
+    function updateCloudBadge(status, text) {
+      if (!cloudDot || !cloudSyncText) return;
+      cloudDot.className = 'cloud-dot ' + (status === 'syncing' ? 'syncing' : status === 'offline' ? 'offline' : '');
+      cloudSyncText.textContent = text || (status === 'syncing' ? 'Menyimpan...' : status === 'offline' ? 'Lokal' : 'Firebase');
+    }
+
+    try {
+      app = initializeApp(firebaseConfig);
+      db = getFirestore(app);
+      auth = getAuth(app);
+
+      // Coba autentikasi anonim untuk membedakan data tiap perangkat
+      signInAnonymously(auth).then(cred => {
+        if (cred && cred.user) {
+          currentUserId = cred.user.uid;
+          localStorage.setItem('prodhub_user_id', currentUserId);
+        }
+        setupFirestoreListener(currentUserId);
+      }).catch(err => {
+        console.warn('Catatan auth (menggunakan device ID lokal):', err.message);
+        setupFirestoreListener(currentUserId);
+      });
+    } catch (e) {
+      console.warn('Firebase init offline:', e);
+      updateCloudBadge('offline', 'Lokal');
+    }
+
+    function setupFirestoreListener(userId) {
+      if (!db || !userId) return;
+      try {
+        const userDocRef = doc(db, 'users', userId);
+        updateCloudBadge('syncing', 'Menghubungkan...');
+        
+        onSnapshot(userDocRef, (snap) => {
+          if (snap.exists()) {
+            const data = snap.data();
+            isRemoteUpdating = true;
+
+            if (Array.isArray(data.tasks)) {
+              tasks = data.tasks;
+              localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(tasks));
+              renderTasks();
+            }
+
+            if (data.focusStats && typeof data.focusStats === 'object') {
+              focusStats = data.focusStats;
+              localStorage.setItem('prodhub_focus_stats', JSON.stringify(focusStats));
+              updateStatsDisplay();
+            }
+
+            if (data.timerSettings && typeof data.timerSettings === 'object') {
+              const foc = data.timerSettings.pomodoro || 25;
+              const brk = data.timerSettings.shortBreak || 5;
+              timerSettings.pomodoro = foc * 60;
+              timerSettings.shortBreak = brk * 60;
+              localStorage.setItem(TIMER_SETTINGS_KEY, JSON.stringify({ pomodoro: foc, shortBreak: brk }));
+              updateModeLabels();
+              if (!isRunning) {
+                totalSeconds = timerSettings[currentMode];
+                remainingSeconds = totalSeconds;
+                updateTimerDisplay();
+              }
+            }
+
+            if (Array.isArray(data.journals)) {
+              journals = data.journals;
+              localStorage.setItem(JOURNAL_STORAGE_KEY, JSON.stringify(journals));
+              renderJournals();
+            }
+
+            isRemoteUpdating = false;
+            updateCloudBadge('synced', 'Tersinkron');
+          } else {
+            // Jika dokumen belum ada di cloud, unggah data awal
+            syncToFirebase(true);
+          }
+        }, (error) => {
+          console.warn('Firestore snapshot error:', error.message);
+          updateCloudBadge('offline', 'Lokal');
+        });
+      } catch (err) {
+        console.warn('Firestore setup error:', err);
+        updateCloudBadge('offline', 'Lokal');
+      }
+    }
+
+    function syncToFirebase(immediate = false) {
+      if (!db || !currentUserId || isRemoteUpdating) return;
+      if (syncDebounceTimer) clearTimeout(syncDebounceTimer);
+
+      updateCloudBadge('syncing', 'Menyimpan...');
+
+      const doSync = async () => {
+        try {
+          const userDocRef = doc(db, 'users', currentUserId);
+          await setDoc(userDocRef, {
+            tasks: tasks,
+            focusStats: focusStats,
+            timerSettings: {
+              pomodoro: Math.round(timerSettings.pomodoro / 60),
+              shortBreak: Math.round(timerSettings.shortBreak / 60)
+            },
+            journals: journals,
+            updatedAt: Date.now()
+          }, { merge: true });
+          updateCloudBadge('synced', 'Tersinkron');
+        } catch (err) {
+          console.warn('Gagal sinkron ke Firebase:', err);
+          updateCloudBadge('offline', 'Lokal');
+        }
+      };
+
+      if (immediate) {
+        doSync();
+      } else {
+        syncDebounceTimer = setTimeout(doSync, 350);
+      }
+    }
 
       // ==========================================
       // DATE FORMATTING (Indonesian locale)
@@ -1681,6 +2205,14 @@
       // ==========================================
       const LOCAL_STORAGE_KEY = 'prodhub_tasks';
 
+      // Helper untuk format ISO datetime-local
+      const formatIsoDate = (d, h, m) => {
+        const year = d.getFullYear();
+        const month = String(d.getMonth() + 1).padStart(2, '0');
+        const day = String(d.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}T${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+      };
+
       let tasks = [];
       try {
         tasks = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY) || '[]');
@@ -1689,10 +2221,35 @@
       }
 
       if (tasks.length === 0) {
+        const todayDate = new Date();
+        const tomorrowDate = new Date();
+        tomorrowDate.setDate(todayDate.getDate() + 1);
+
         tasks = [
-          { id: 1, text: 'Selesaikan latihan soal Matematika Pythagoras', priority: 'Tinggi', completed: false, time: '09:00' },
-          { id: 2, text: 'Review bab 3 Bahasa Indonesia teks eksposisi', priority: 'Sedang', completed: true, time: '08:15' },
-          { id: 3, text: 'Istirahat sejenak & minum air putih', priority: 'Rendah', completed: false, time: '10:30' }
+          {
+            id: 1,
+            text: 'Selesaikan latihan soal Matematika Pythagoras',
+            priority: 'Tinggi',
+            completed: false,
+            time: '09:00',
+            deadline: formatIsoDate(todayDate, 21, 0)
+          },
+          {
+            id: 2,
+            text: 'Review bab 3 Bahasa Indonesia teks eksposisi',
+            priority: 'Sedang',
+            completed: true,
+            time: '08:15',
+            deadline: formatIsoDate(todayDate, 15, 0)
+          },
+          {
+            id: 3,
+            text: 'Istirahat sejenak & minum air putih',
+            priority: 'Rendah',
+            completed: false,
+            time: '10:30',
+            deadline: formatIsoDate(tomorrowDate, 17, 0)
+          }
         ];
         saveTasks();
       }
@@ -1701,6 +2258,8 @@
       let selectedPriority = 'Sedang';
 
       const taskInput = document.getElementById('taskInput');
+      const taskDeadlineInput = document.getElementById('taskDeadlineInput');
+      const btnClearDeadline = document.getElementById('btnClearDeadline');
       const addTaskForm = document.getElementById('addTaskForm');
       const priorityPills = document.querySelectorAll('.priority-pill');
       const filterBtns = document.querySelectorAll('.filter-btn');
@@ -1718,6 +2277,71 @@
         } catch (e) {
           console.error('Gagal menyimpan ke LocalStorage', e);
         }
+        syncToFirebase();
+      }
+
+      if (taskDeadlineInput) {
+        taskDeadlineInput.addEventListener('input', () => {
+          if (taskDeadlineInput.value) {
+            if (btnClearDeadline) btnClearDeadline.style.display = 'inline-block';
+          } else {
+            if (btnClearDeadline) btnClearDeadline.style.display = 'none';
+          }
+        });
+      }
+
+      if (btnClearDeadline) {
+        btnClearDeadline.addEventListener('click', () => {
+          if (taskDeadlineInput) taskDeadlineInput.value = '';
+          btnClearDeadline.style.display = 'none';
+        });
+      }
+
+      function getDeadlineInfo(deadlineStr, completed) {
+        if (!deadlineStr) return null;
+        const d = new Date(deadlineStr);
+        if (isNaN(d.getTime())) return null;
+
+        const now = new Date();
+        const isPast = d < now;
+
+        const isSameDay = d.getDate() === now.getDate() &&
+                          d.getMonth() === now.getMonth() &&
+                          d.getFullYear() === now.getFullYear();
+
+        const tomorrow = new Date(now);
+        tomorrow.setDate(now.getDate() + 1);
+        const isTomorrow = d.getDate() === tomorrow.getDate() &&
+                           d.getMonth() === tomorrow.getMonth() &&
+                           d.getFullYear() === tomorrow.getFullYear();
+
+        const timeStr = d.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+        
+        let label = '';
+        if (isSameDay) {
+          label = `Hari Ini, ${timeStr}`;
+        } else if (isTomorrow) {
+          label = `Besok, ${timeStr}`;
+        } else {
+          label = `${d.toLocaleDateString('id-ID', { day: 'numeric', month: 'short' })}, ${timeStr}`;
+        }
+
+        let statusClass = 'upcoming';
+        let badgeIcon = '📅';
+
+        if (completed) {
+          statusClass = 'completed';
+          badgeIcon = '✓';
+        } else if (isPast) {
+          statusClass = 'overdue';
+          badgeIcon = '⚠️';
+          label = `Terlewat (${label})`;
+        } else if (isSameDay) {
+          statusClass = 'today';
+          badgeIcon = '⏰';
+        }
+
+        return { label, statusClass, badgeIcon };
       }
 
       priorityPills.forEach(pill => {
@@ -1785,6 +2409,19 @@
           if (task.priority === 'Tinggi') prioClass = 'high';
           if (task.priority === 'Rendah') prioClass = 'low';
 
+          let deadlineHtml = '';
+          if (task.deadline) {
+            const dl = getDeadlineInfo(task.deadline, task.completed);
+            if (dl) {
+              deadlineHtml = `
+                <span class="meta-deadline-pill ${dl.statusClass}" title="Tenggat Waktu: ${escapeHtml(dl.label)}">
+                  <span>${dl.badgeIcon}</span>
+                  <span>${escapeHtml(dl.label)}</span>
+                </span>
+              `;
+            }
+          }
+
           card.innerHTML = `
             <button class="btn-check-circle" aria-label="Tandai selesai">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
@@ -1797,6 +2434,7 @@
                 <span class="meta-priority-pill ${prioClass}">
                   Prioritas ${task.priority}
                 </span>
+                ${deadlineHtml}
                 ${task.time ? `<span class="meta-time">${task.time}</span>` : ''}
               </div>
             </div>
@@ -1843,17 +2481,22 @@
           minute: '2-digit'
         });
 
+        const deadlineVal = taskDeadlineInput && taskDeadlineInput.value ? taskDeadlineInput.value : null;
+
         const newTask = {
           id: Date.now(),
           text: text,
           priority: selectedPriority,
           completed: false,
-          time: timeStr
+          time: timeStr,
+          deadline: deadlineVal
         };
 
         tasks.unshift(newTask);
         saveTasks();
         taskInput.value = '';
+        if (taskDeadlineInput) taskDeadlineInput.value = '';
+        if (btnClearDeadline) btnClearDeadline.style.display = 'none';
         renderTasks();
         showToast('Tugas baru ditambahkan! 🚀');
       });
@@ -1869,6 +2512,8 @@
       const controlIcon = document.getElementById('controlIcon');
       const controlText = document.getElementById('controlText');
       const modeBtns = document.querySelectorAll('.mode-btn');
+      const labelModeFocus = document.getElementById('labelModeFocus');
+      const labelModeBreak = document.getElementById('labelModeBreak');
 
       const statsCompletedSessions = document.getElementById('statsCompletedSessions');
       const statsTotalMinutes = document.getElementById('statsTotalMinutes');
@@ -1878,10 +2523,48 @@
       const btnCloseModal = document.getElementById('btnCloseModal');
       const modalDesc = document.getElementById('modalDesc');
 
+      // Kustomisasi Timer Elemen
+      const timerSettingsModal = document.getElementById('timerSettingsModal');
+      const btnOpenTimerSettings = document.getElementById('btnOpenTimerSettings');
+      const btnCloseTimerSettingsModal = document.getElementById('btnCloseTimerSettingsModal');
+      const btnSaveTimerSettings = document.getElementById('btnSaveTimerSettings');
+      const btnResetTimerDefaults = document.getElementById('btnResetTimerDefaults');
+      const customFocusInput = document.getElementById('customFocusInput');
+      const customBreakInput = document.getElementById('customBreakInput');
+      const customFocusValBadge = document.getElementById('customFocusValBadge');
+      const customBreakValBadge = document.getElementById('customBreakValBadge');
+      const btnFocusDec = document.getElementById('btnFocusDec');
+      const btnFocusInc = document.getElementById('btnFocusInc');
+      const btnBreakDec = document.getElementById('btnBreakDec');
+      const btnBreakInc = document.getElementById('btnBreakInc');
+      const chipPresets = document.querySelectorAll('.chip-preset');
+
+      const TIMER_SETTINGS_KEY = 'prodhub_timer_settings';
+      let customMinutes = { pomodoro: 25, shortBreak: 5 };
+      try {
+        const savedSettings = JSON.parse(localStorage.getItem(TIMER_SETTINGS_KEY) || '{}');
+        if (savedSettings.pomodoro && typeof savedSettings.pomodoro === 'number') {
+          customMinutes.pomodoro = Math.max(1, Math.min(180, savedSettings.pomodoro));
+        }
+        if (savedSettings.shortBreak && typeof savedSettings.shortBreak === 'number') {
+          customMinutes.shortBreak = Math.max(1, Math.min(60, savedSettings.shortBreak));
+        }
+      } catch (e) {
+        customMinutes = { pomodoro: 25, shortBreak: 5 };
+      }
+
       const timerSettings = {
-        pomodoro: 25 * 60,
-        shortBreak: 5 * 60
+        pomodoro: customMinutes.pomodoro * 60,
+        shortBreak: customMinutes.shortBreak * 60
       };
+
+      function updateModeLabels() {
+        const focMin = Math.round(timerSettings.pomodoro / 60);
+        const brkMin = Math.round(timerSettings.shortBreak / 60);
+        if (labelModeFocus) labelModeFocus.textContent = `Fokus Belajar (${focMin}m)`;
+        if (labelModeBreak) labelModeBreak.textContent = `Istirahat (${brkMin}m)`;
+      }
+      updateModeLabels();
 
       let currentMode = 'pomodoro';
       let totalSeconds = timerSettings[currentMode];
@@ -1905,6 +2588,7 @@
       function saveFocusStats() {
         localStorage.setItem('prodhub_focus_stats', JSON.stringify(focusStats));
         updateStatsDisplay();
+        syncToFirebase();
       }
 
       const circleCircumference = 2 * Math.PI * 90;
@@ -2040,12 +2724,13 @@
         playNativeAlarm();
 
         if (currentMode === 'pomodoro') {
+          const completedMins = Math.round(timerSettings.pomodoro / 60);
           focusStats.sessions += 1;
-          focusStats.minutes += 25;
+          focusStats.minutes += completedMins;
           saveFocusStats();
           triggerConfetti();
 
-          showReflectionModal();
+          showReflectionModal(completedMins);
           switchMode('shortBreak');
         } else {
           showToast('Waktu istirahat santai selesai! Siap belajar lagi? 💪');
@@ -2053,8 +2738,9 @@
         }
       }
 
-      function showReflectionModal() {
-        modalDesc.innerHTML = 'Luar biasa! Kamu telah menuntaskan <strong>25 menit sesi fokus belajar</strong>. Luangkan 1 menit untuk mencatat evaluasi materi di <strong>Tab Jurnal</strong>.';
+      function showReflectionModal(mins) {
+        const durationText = mins || Math.round(timerSettings.pomodoro / 60);
+        modalDesc.innerHTML = `Luar biasa! Kamu telah menuntaskan <strong>${durationText} menit sesi fokus belajar</strong>. Luangkan 1 menit untuk mencatat evaluasi materi di <strong>Tab Jurnal</strong>.`;
         reflectionModal.classList.add('show');
       }
 
@@ -2096,6 +2782,174 @@
           switchMode(mode);
         });
       });
+
+      // ==========================================
+      // LOGIKA KUSTOMISASI TIMER (SETTINGS MODAL)
+      // ==========================================
+      function syncTimerModalInputs() {
+        const focMin = Math.round(timerSettings.pomodoro / 60);
+        const brkMin = Math.round(timerSettings.shortBreak / 60);
+        if (customFocusInput) customFocusInput.value = focMin;
+        if (customBreakInput) customBreakInput.value = brkMin;
+        if (customFocusValBadge) customFocusValBadge.textContent = `${focMin} Menit`;
+        if (customBreakValBadge) customBreakValBadge.textContent = `${brkMin} Menit`;
+
+        chipPresets.forEach(chip => {
+          const target = chip.getAttribute('data-target');
+          const val = parseInt(chip.getAttribute('data-val'), 10);
+          if (target === 'focus') {
+            chip.classList.toggle('active', val === focMin);
+          } else if (target === 'break') {
+            chip.classList.toggle('active', val === brkMin);
+          }
+        });
+      }
+
+      function syncChipsHighlight() {
+        const fVal = parseInt(customFocusInput.value, 10);
+        const bVal = parseInt(customBreakInput.value, 10);
+        chipPresets.forEach(chip => {
+          const target = chip.getAttribute('data-target');
+          const val = parseInt(chip.getAttribute('data-val'), 10);
+          if (target === 'focus') chip.classList.toggle('active', val === fVal);
+          if (target === 'break') chip.classList.toggle('active', val === bVal);
+        });
+      }
+
+      function openTimerSettings() {
+        syncTimerModalInputs();
+        if (timerSettingsModal) timerSettingsModal.classList.add('show');
+      }
+
+      function closeTimerSettings() {
+        if (timerSettingsModal) timerSettingsModal.classList.remove('show');
+      }
+
+      if (btnOpenTimerSettings) btnOpenTimerSettings.addEventListener('click', openTimerSettings);
+      if (btnCloseTimerSettingsModal) btnCloseTimerSettingsModal.addEventListener('click', closeTimerSettings);
+      if (timerSettingsModal) {
+        timerSettingsModal.addEventListener('click', (e) => {
+          if (e.target === timerSettingsModal) closeTimerSettings();
+        });
+      }
+
+      if (btnFocusDec) {
+        btnFocusDec.addEventListener('click', () => {
+          let val = parseInt(customFocusInput.value, 10) || 25;
+          if (val > 1) {
+            val -= 1;
+            customFocusInput.value = val;
+            customFocusValBadge.textContent = `${val} Menit`;
+            syncChipsHighlight();
+          }
+        });
+      }
+
+      if (btnFocusInc) {
+        btnFocusInc.addEventListener('click', () => {
+          let val = parseInt(customFocusInput.value, 10) || 25;
+          if (val < 180) {
+            val += 1;
+            customFocusInput.value = val;
+            customFocusValBadge.textContent = `${val} Menit`;
+            syncChipsHighlight();
+          }
+        });
+      }
+
+      if (btnBreakDec) {
+        btnBreakDec.addEventListener('click', () => {
+          let val = parseInt(customBreakInput.value, 10) || 5;
+          if (val > 1) {
+            val -= 1;
+            customBreakInput.value = val;
+            customBreakValBadge.textContent = `${val} Menit`;
+            syncChipsHighlight();
+          }
+        });
+      }
+
+      if (btnBreakInc) {
+        btnBreakInc.addEventListener('click', () => {
+          let val = parseInt(customBreakInput.value, 10) || 5;
+          if (val < 60) {
+            val += 1;
+            customBreakInput.value = val;
+            customBreakValBadge.textContent = `${val} Menit`;
+            syncChipsHighlight();
+          }
+        });
+      }
+
+      if (customFocusInput) {
+        customFocusInput.addEventListener('input', () => {
+          let val = parseInt(customFocusInput.value, 10) || 1;
+          customFocusValBadge.textContent = `${val} Menit`;
+          syncChipsHighlight();
+        });
+      }
+
+      if (customBreakInput) {
+        customBreakInput.addEventListener('input', () => {
+          let val = parseInt(customBreakInput.value, 10) || 1;
+          customBreakValBadge.textContent = `${val} Menit`;
+          syncChipsHighlight();
+        });
+      }
+
+      chipPresets.forEach(chip => {
+        chip.addEventListener('click', () => {
+          const target = chip.getAttribute('data-target');
+          const val = parseInt(chip.getAttribute('data-val'), 10);
+          if (target === 'focus') {
+            customFocusInput.value = val;
+            customFocusValBadge.textContent = `${val} Menit`;
+          } else if (target === 'break') {
+            customBreakInput.value = val;
+            customBreakValBadge.textContent = `${val} Menit`;
+          }
+          syncChipsHighlight();
+        });
+      });
+
+      function applyNewTimerSettings(focMin, brkMin) {
+        focMin = Math.max(1, Math.min(180, focMin));
+        brkMin = Math.max(1, Math.min(60, brkMin));
+
+        timerSettings.pomodoro = focMin * 60;
+        timerSettings.shortBreak = brkMin * 60;
+
+        try {
+          localStorage.setItem(TIMER_SETTINGS_KEY, JSON.stringify({ pomodoro: focMin, shortBreak: brkMin }));
+        } catch (e) {
+          console.error('Gagal menyimpan timer settings', e);
+        }
+
+        updateModeLabels();
+
+        pauseTimer();
+        totalSeconds = timerSettings[currentMode];
+        remainingSeconds = totalSeconds;
+        updateTimerDisplay();
+        updateControlButtonsUI();
+        closeTimerSettings();
+        syncToFirebase();
+        showToast(`Durasi diperbarui: Fokus ${focMin}m, Istirahat ${brkMin}m! ⏱️`);
+      }
+
+      if (btnSaveTimerSettings) {
+        btnSaveTimerSettings.addEventListener('click', () => {
+          const foc = parseInt(customFocusInput.value, 10) || 25;
+          const brk = parseInt(customBreakInput.value, 10) || 5;
+          applyNewTimerSettings(foc, brk);
+        });
+      }
+
+      if (btnResetTimerDefaults) {
+        btnResetTimerDefaults.addEventListener('click', () => {
+          applyNewTimerSettings(25, 5);
+        });
+      }
 
       // Ambient White Noise
       let ambientCtx = null;
@@ -2232,6 +3086,7 @@
         } catch (e) {
           console.error('Gagal menyimpan jurnal ke LocalStorage', e);
         }
+        syncToFirebase();
       }
 
       function getSubjectClass(subj) {
@@ -2439,8 +3294,6 @@
       updateTimerDisplay();
       updateControlButtonsUI();
       renderJournals();
-
-    })();
   </script>
 </body>
 </html>
